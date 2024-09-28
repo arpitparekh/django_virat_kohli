@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        :root {
+            --sidebar-bg: #2c3e50;
+            --sidebar-hover: #34495e;
+            --sidebar-active: #e74c3c;
+            --content-bg: #ecf0f1;
+            --text-color: #333;
+            --sidebar-text: #ecf0f1;
+        }
+        body {
+            font-family: system-ui;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            color: var(--text-color);
+        }
+        #sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: var(--sidebar-bg);
+            padding: 20px;
+            box-sizing: border-box;
+            color: var(--sidebar-text);
+        }
+        #content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: var(--content-bg);
+            box-sizing: border-box;
+        }
+        .sidebar-item {
+            margin-bottom: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .sidebar-item a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        .sidebar-item:hover a {
+            background-color: var(--sidebar-hover);
+            transform: translateX(5px);
+        }
+        .active a {
+            background-color: var(--sidebar-active);
+            color: white;
+            font-weight: bold;
+        }
+        h2 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: var(--sidebar-text);
+            border-bottom: 2px solid var(--sidebar-active);
+            padding-bottom: 10px;
+        }
+        #content h1 {
+            margin-top: 0;
+            color: var(--sidebar-bg);
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Dashboard</h2>
+        <div class="sidebar-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+            <a href="{% url 'dashboard' %}">Home</a>
+        </div>
+        <div class="sidebar-item {% if request.resolver_match.url_name == 'pass_data' %}active{% endif %}">
+            <a href="{% url 'pass_data' %}">Pass Data to HTML</a>
+        </div>
+        <div class="sidebar-item">
+            <a href="#">Analytics</a>
+        </div>
+        <div class="sidebar-item">
+            <a href="#">Reports</a>
+        </div>
+        <div class="sidebar-item">
+            <a href="#">Users</a>
+        </div>
+        <div class="sidebar-item">
+            <a href="#">Settings</a>
+        </div>
+    </div>
+    <div id="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

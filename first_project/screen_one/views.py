@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
-def show_text(request):    # functional views
-  context = {
-    'text': 'Hello World',
-    'fruits' : ['Apple','Banana','Cherry','Mango','Dragon Fruit']
-  }
+def show_dashboard(request):
+    return render(request, "dashboard.html")
 
-  return render(request,"show_text.html",context)
+def show_pass_data(request):
+    context = {
+        'data': 'This is passed data'
+    }
+    return render(request, "pass_data.html", context)
