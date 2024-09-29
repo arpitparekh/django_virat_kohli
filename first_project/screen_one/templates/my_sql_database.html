@@ -1,0 +1,143 @@
+{% extends "base_dashboard.html" %} {% load static %} {% block title %}My SQL
+Database{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'admin/css/custom_styles.css' %}" />
+{% endblock %} {% block content %}
+
+<style>
+  /* Enhanced custom styles for my_sql_database.html */
+
+  .database-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--body-bg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .database-title {
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  .database-section {
+    background-color: var(--darkened-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .database-section-title {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.5rem;
+  }
+
+  .database-form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .database-form label {
+    font-weight: bold;
+    color: var(--body-medium-color);
+  }
+
+  .database-form input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .database-form button {
+    background-color: var(--primary);
+    color: var(--primary-fg);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .database-form button:hover {
+    background-color: var(--secondary);
+  }
+
+  .database-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .database-table th,
+  .database-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--hairline-color);
+  }
+
+  .database-table thead th {
+    background-color: var(--primary);
+    color: var(--primary-fg);
+    font-weight: bold;
+  }
+
+  .database-table tbody tr:nth-child(even) {
+    background-color: var(--body-bg);
+  }
+
+  .database-table tbody tr:hover {
+    background-color: var(--selected-bg);
+  }
+</style>
+
+<div class="database-container">
+  <h1 class="database-title">MySQL Database Management</h1>
+
+  <div class="database-section">
+    <h2 class="database-section-title">Add New Entry</h2>
+    <form class="database-form" method="post" action="">
+      {% csrf_token %}
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="database-section">
+    <h2 class="database-section-title">Stored Data</h2>
+    <table class="database-table">
+      <thead>
+        <tr>
+          <th>Field 1</th>
+          <th>Field 2</th>
+          <!-- Add more table headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+        <tr>
+          <td>{{ item.field1 }}</td>
+          <td>{{ item.field2 }}</td>
+          <!-- Add more table cells as needed -->
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2" style="text-align: center">No data available</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

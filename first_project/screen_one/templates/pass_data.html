@@ -1,9 +1,88 @@
 {% extends "base_dashboard.html" %}
-
 {% block title %}Pass Data to HTML{% endblock %}
-
 {% block content %}
-<h1>Pass Data to HTML</h1>
-<p>Passed data: {{ data }}</p>
+<style>
+    .content-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .section {
+        margin-bottom: 30px;
+    }
+    .section-title {
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .fruit-list {
+        list-style-position: inside;
+        padding-left: 0;
+    }
+    .fruit-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #ecf0f1;
+    }
+    .fruit-list li:last-child {
+        border-bottom: none;
+    }
+    .user-card {
+        background-color: #2c3e50;
+        color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .user-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #ffffff;
+        margin-bottom: 15px;
+    }
+    .user-name {
+        margin: 10px 0;
+        font-size: 24px;
+    }
+    .user-details {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+    .user-company {
+        font-style: italic;
+        margin-top: 10px;
+    }
+</style>
 
+<div class="content-wrapper">
+    <section class="section">
+        <h1 class="section-title">Pass Data to HTML</h1>
+        <p>Passed data: {{ data }}</p>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Fruit List</h2>
+        <ol class="fruit-list">
+        {% for fruit in fruits %}
+            <li>{{ fruit }}</li>
+        {% endfor %}
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">User Profile</h2>
+        <div class="user-card">
+            <img src="{{ user.image }}" alt="{{ user.name }}" class="user-image">
+            <h2 class="user-name">{{user.name}}</h2>
+            <p class="user-details">{{user.gender}} | {{user.age}} years old</p>
+            <p class="user-company">{{user.company}}</p>
+        </div>
+    </section>
+</div>
 {% endblock %}

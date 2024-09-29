@@ -19,19 +19,24 @@
             margin: 0;
             padding: 0;
             display: flex;
+            height: 100%;
             color: var(--text-color);
         }
         #sidebar {
             width: 250px;
-            height: 100vh;
             background-color: var(--sidebar-bg);
             padding: 20px;
+            display: flex;
+            flex-direction: column;
             box-sizing: border-box;
             color: var(--sidebar-text);
+            overflow-y: auto;
         }
         #content {
             flex-grow: 1;
+            min-height: 100vh;
             padding: 30px;
+            overflow: auto;
             background-color: var(--content-bg);
             box-sizing: border-box;
         }
@@ -78,8 +83,8 @@
         <div class="sidebar-item {% if request.resolver_match.url_name == 'pass_data' %}active{% endif %}">
             <a href="{% url 'pass_data' %}">Pass Data to HTML</a>
         </div>
-        <div class="sidebar-item">
-            <a href="#">Analytics</a>
+        <div class="sidebar-item {% if request.resolver_match.url_name == 'mysql_database' %}active{% endif %}">
+            <a href="{% url 'mysql_database' %}">MySql database</a>
         </div>
         <div class="sidebar-item">
             <a href="#">Reports</a>
