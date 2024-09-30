@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .forms import EmailPasswordForm
 
 class User:
     def __init__(self,name,age,gender,company,image):
@@ -13,7 +14,17 @@ def show_dashboard(request):
     return render(request, "dashboard.html")
 
 def mysql_database(request):
-    return render(request, "my_sql_database.html")
+    form = EmailPasswordForm()
+    if request.method=="POST":
+        form = EmailPasswordForm(request.POST)
+        if(form.is_valid):
+            form.save()
+            return redirect('mysql_database')
+            print("Data saved in database")
+        else:
+            print("Data not saved in database")
+    context = {'form':form}
+    return render(request, "my_sql_database.html",context)
 
 def show_pass_data(request):
 

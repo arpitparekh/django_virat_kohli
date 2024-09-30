@@ -104,12 +104,16 @@ Database{% endblock %} {% block extra_css %}
 
   <div class="database-section">
     <h2 class="database-section-title">Add New Entry</h2>
-    <form class="database-form" method="post" action="">
+    <form class="database-form" method="post">
       {% csrf_token %}
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required />
+       <div>
+        <label for="id_email">Email:</label>
+        {{ form.email }}
+    </div>
+    <div>
+        <label for="id_password">Password:</label>
+        {{ form.password }}
+    </div>
       <button type="submit">Submit</button>
     </form>
   </div>
